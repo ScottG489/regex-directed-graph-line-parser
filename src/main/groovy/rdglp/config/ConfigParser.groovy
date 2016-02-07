@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.type.CollectionType
 
 @Singleton
-public class ConfigParser {
+class ConfigParser {
     static ParserConfig generateParserConfig(InputStream config) {
         ObjectMapper mapper = new ObjectMapper();
         final CollectionType javaType =
