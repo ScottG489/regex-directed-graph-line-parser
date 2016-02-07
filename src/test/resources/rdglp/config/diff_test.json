@@ -1,0 +1,125 @@
+[
+  {
+    "name": "binaryFilesNode",
+    "applicabilityPattern": "Binary files (a/)*(.*) and (b/)*(.*) differ",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": []
+  },
+  {
+    "name": "gitBinaryNode",
+    "applicabilityPattern": "GIT binary patch",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": []
+  },
+  {
+    "name": "toFileNode",
+    "applicabilityPattern": "\\+\\+\\+ (b/)*(.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": []
+  },
+  {
+    "name": "fromFileNode",
+    "applicabilityPattern": "--- (a/)*(.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "toFileNode"
+    ]
+  },
+  {
+    "name": "indexNode",
+    "applicabilityPattern": "index (.*)\\.\\.([^ ]*) *(.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "fromFileNode",
+      "binaryFilesNode",
+      "gitBinaryNode"
+    ]
+  },
+  {
+    "name": "copyToNode",
+    "applicabilityPattern": "copy to (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "indexNode"
+    ]
+  },
+  {
+    "name": "copyFromNode",
+    "applicabilityPattern": "copy from (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "copyToNode"
+    ]
+  },
+  {
+    "name": "renameToNode",
+    "applicabilityPattern": "rename to (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "indexNode"
+    ]
+  },
+  {
+    "name": "renameFromNode",
+    "applicabilityPattern": "rename from (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "renameToNode"
+    ]
+  },
+  {
+    "name": "similarityIndexNode",
+    "applicabilityPattern": "similarity index (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "copyFromNode",
+      "renameFromNode"
+    ]
+  },
+  {
+    "name": "newModeNode",
+    "applicabilityPattern": "new mode (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "indexNode",
+      "similarityIndexNode"
+    ]
+  },
+  {
+    "name": "oldModeNode",
+    "applicabilityPattern": "old mode (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "newModeNode"
+    ]
+  },
+  {
+    "name": "deletedFileNode",
+    "applicabilityPattern": "deleted file mode (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "indexNode"
+    ]
+  },
+  {
+    "name": "newFileModeNode",
+    "applicabilityPattern": "new file mode (.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "indexNode"
+    ]
+  },
+  {
+    "name": "diffGitNode",
+    "applicabilityPattern": "diff --git a/(.*) b/(.*)",
+    "lineHandlingStrategy": "rdglp.strategy.EmptyHandlingStrategy",
+    "possibleNextNodes": [
+      "newFileModeNode",
+      "deletedFileNode",
+      "indexNode",
+      "oldModeNode",
+      "similarityIndexNode"
+    ]
+  }
+]
+
