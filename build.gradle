@@ -37,7 +37,7 @@ publishing {
         JCenterPublication(MavenPublication) {
             from components.java
             groupId 'com.github.scottg489'
-            artifactId 'unified-diff-parser'
+            artifactId 'regex-directed-graph-line-parser'
             version "0.${ENV['SNAP_PIPELINE_COUNTER']}"
             artifact sourceJar {
                 classifier "sources"
