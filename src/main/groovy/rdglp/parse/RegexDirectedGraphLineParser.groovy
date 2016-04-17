@@ -31,6 +31,7 @@ class RegexDirectedGraphLineParser<ModelType> implements LineParser {
                 return
             }
         }
+        // TODO: Should we use a custom exception?
         throw new Exception("Malformed patch. Line was not expected: ${line}")
     }
 }
