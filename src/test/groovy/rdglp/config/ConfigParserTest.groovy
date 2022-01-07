@@ -23,7 +23,7 @@ class ConfigParserTest extends Specification {
 
     private static Map<String, ParserNode> getParserConfig() {
         InputStream config = getTestResourceText("diff_test.json")
-        return ConfigParser.getInstance().generateParserConfig(config)
+        return new ConfigParser().generateParserConfig(config)
     }
 
     private static InputStream getTestResourceText(String fileName) {
