@@ -1,9 +1,9 @@
 package rdglp.node;
 
-import org.codehaus.groovy.runtime.StringGroovyMethods;
 import rdglp.strategy.LineHandlingStrategy;
 
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GenericParserNode implements ParserNode {
@@ -15,7 +15,8 @@ public class GenericParserNode implements ParserNode {
 
     @Override
     public boolean isApplicable(String line) {
-        return StringGroovyMethods.matches(line, applicabilityPattern);
+        Matcher matcher = applicabilityPattern.matcher(line);
+        return matcher.find();
     }
 
     @Override

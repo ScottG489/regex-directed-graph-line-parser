@@ -1,15 +1,10 @@
 package rdglp.parse;
 
-import org.codehaus.groovy.runtime.DefaultGroovyMethods;
-import org.codehaus.groovy.runtime.StringGroovyMethods;
 import rdglp.node.ParserNode;
 import rdglp.strategy.LineHandlingStrategy;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,7 +20,7 @@ public class RegexDirectedGraphLineParser<ModelType> implements LineParser {
         BufferedReader reader = new BufferedReader(new StringReader(parsableLines));
         Iterator<String> lineIter = reader.lines().collect(Collectors.toList()).iterator();
 //        Iterator<String> lineIter = StringGroovyMethods.readLines(parsableLines).iterator();
-        traverseDirectedNodeGraph(lineIter, DefaultGroovyMethods.toSet(new ArrayList<>(Arrays.asList(firstNode))));
+        traverseDirectedNodeGraph(lineIter, Set.of(firstNode));
         return model;
     }
 

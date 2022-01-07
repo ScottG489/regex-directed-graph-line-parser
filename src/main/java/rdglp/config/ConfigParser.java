@@ -2,7 +2,6 @@ package rdglp.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
-import groovy.lang.Singleton;
 
 import java.io.IOException;
 import java.io.InputStream;
