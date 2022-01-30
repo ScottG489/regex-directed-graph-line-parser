@@ -4,8 +4,8 @@ RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
   git \
   openjdk-11-jdk \
-  jq
-#  gnupg \
+  jq \
+  gnupg
 
 RUN useradd -m -u 1000 -s /usr/bin/bash build-user
 USER build-user

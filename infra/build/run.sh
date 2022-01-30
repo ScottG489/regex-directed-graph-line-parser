@@ -3,6 +3,12 @@ set -e
 
 source /home/build-user/build/build_functions.sh
 
+trap cleanup EXIT
+cleanup() {
+  cd "$(git rev-parse --show-toplevel)"
+  rm secring.gpg || true
+}
+
 set +x
 setup_credentials "$1"
 set -x
@@ -14,3 +20,7 @@ git clone $_GIT_REPO
 cd $_PROJECT_NAME
 
 build_test
+
+set +x
+upload_archives "$1"
+set -x

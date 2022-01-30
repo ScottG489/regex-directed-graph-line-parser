@@ -2,10 +2,14 @@
 
 readonly IMAGE_NAME='scottg489/regex-directed-graph-line-parser-build:latest'
 readonly ID_RSA=$1
+readonly OSSRH_USERNAME=$2
+readonly OSSRH_PASSWORD=$3
 
 read -r -d '' JSON_BODY <<- EOM
   {
-  "ID_RSA": "$ID_RSA"
+  "ID_RSA": "$ID_RSA",
+  "OSSRH_USERNAME": "$OSSRH_USERNAME",
+  "OSSRH_PASSWORD": "$OSSRH_PASSWORD"
   }
 EOM
 
