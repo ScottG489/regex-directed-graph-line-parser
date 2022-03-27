@@ -1,5 +1,5 @@
 # regex-directed-graph-line-parser
-![CI](https://github.com/ScottG489/conjob/workflows/CI/badge.svg)
+![CI](https://github.com/ScottG489/regex-directed-graph-line-parser/workflows/CI/badge.svg)
 
 A regular expression parser for data structured on lines appearing in a consistent order.
 
