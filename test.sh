@@ -5,7 +5,7 @@ trap cleanup EXIT
 cleanup() {
   # The local fs is mounted into the container and as such any files it writes will have their permissions changed.
   #   This will change the permissions back and clean up other files we don't want hanging around.
-  sudo chown -R "$(whoami)":"$(whoami)" -- * .*
+  sudo chown -R "$(whoami)":"$(whoami)" .
 }
 
 declare ID_RSA_CONTENTS_BASE64
@@ -21,7 +21,7 @@ ID_RSA_CONTENTS_BASE64=$(base64 ~/.ssh/id_rsa | tr -d '\n') ;
 
 # The local fs is mounted into the container and as such any files it writes will have their permissions changed.
 #   This will change the permissions back and clean up other files we don't want hanging around.
-sudo chown -R "$(whoami)":"$(whoami)" -- * .*
+sudo chown -R "$(whoami)":"$(whoami)" .
 
 docker build infra/build -t rdglp-build-test && \
   docker run -it \
