@@ -46,7 +46,7 @@ EOF
   export OSSRH_USERNAME
   export OSSRH_PASSWORD
 
-  ./gradlew --debug uploadArchives -Psigning.secretKeyRingFile=secring.gpg -Psigning.password="$GPG_KEY_PASSWORD" -Psigning.keyId="$GPG_PUB_KEY_SHORT"
+  ./gradlew uploadArchives -Psigning.secretKeyRingFile=secring.gpg -Psigning.password="$GPG_KEY_PASSWORD" -Psigning.keyId="$GPG_PUB_KEY_SHORT"
   gpg --keyserver keys.openpgp.org --send-keys "$GPG_PUB_KEY"
 
   set -x
