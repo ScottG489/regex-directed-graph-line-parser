@@ -48,7 +48,7 @@ EOF
 
   gpg --keyserver keyserver.ubuntu.com --send-keys "$GPG_PUB_KEY"
   set -x
-  sleep 15  # Wait for key to be fully available on keyserver
+  sleep 30  # Wait for key to be fully available on keyserver
 
   ./gradlew publish jreleaserDeploy
 
