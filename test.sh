@@ -10,8 +10,8 @@ cleanup() {
 
 declare ID_RSA_CONTENTS_BASE64
 # Assign actual credentials here
-declare MAVENCENTRAL_USERNAME_BASE64="R2owMnFS"
-declare MAVENCENTRAL_PASSWORD_BASE64="MXNXY0JNa2V3ZnA2NHZWQW43a0xHd1BkWGJBWnpqTVda"
+declare MAVENCENTRAL_USERNAME_BASE64="base64_username"
+declare MAVENCENTRAL_PASSWORD_BASE64="base64_pass"
 
 # Change the location of these files based on where they are on your system
 ID_RSA_CONTENTS_BASE64=$(base64 ~/.ssh/id_rsa | tr -d '\n') ;
