@@ -1,9 +1,10 @@
 plugins {
     id 'groovy'
+    id 'java-library'
     id 'idea'
     id 'jacoco'
-    id 'maven'
-    id 'signing'
+    id 'maven-publish'
+    id 'org.jreleaser' version '1.21.0'
 }
 
 repositories {
@@ -12,78 +13,96 @@ repositories {
 
 group = "io.github.scottg489"
 archivesBaseName = "regex-directed-graph-line-parser"
-version = "0.3.6"
+version = "0.3.14-SNAPSHOT"
 
 dependencies {
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.4'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.6.4'
 
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-    testCompile 'junit:junit:4.12'
+    testImplementation 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testImplementation 'junit:junit:4.12'
 }
 
 jacocoTestReport {
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.required = true
+        html.required = true
     }
 }
 
-task javadocJar(type: Jar) {
-    archiveClassifier.set('javadoc')
-    from javadoc
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
-task sourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from sourceSets.main.allSource
-}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'io.github.scottg489'
+            artifactId = 'regex-directed-graph-line-parser'
 
-artifacts {
-    archives javadocJar, sourcesJar
-}
+            from components.java
 
-signing {
-    sign configurations.archives
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://central.sonatype.com/api/v1/publisher") {
-                authentication(userName: System.getenv("OSSRH_USERNAME"), password: System.getenv("OSSRH_PASSWORD"))
-            }
-
-            snapshotRepository(url: "https://central.sonatype.com/repository/maven-snapshots/") {
-                authentication(userName: System.getenv("OSSRH_USERNAME"), password: System.getenv("OSSRH_PASSWORD"))
-            }
-
-            pom.project {
-                name 'regex-directed-graph-line-parser'
-                packaging 'jar'
-                description 'A library for parsing lines in an ordered defined by a matching regular expression.'
-                url 'https://github.com/ScottG489/regex-directed-graph-line-parser'
-
-                scm {
-                    connection 'git@github.com:ScottG489/regex-directed-graph-line-parser.git'
-                    developerConnection 'git@github.com:ScottG489/regex-directed-graph-line-parser.git'
-                    url 'https://github.com/ScottG489/regex-directed-graph-line-parser'
-                }
-
+            pom {
+                name = 'regex-directed-graph-line-parser'
+                description = 'A library for parsing lines in an ordered defined by a matching regular expression.'
+                url = 'https://github.com/ScottG489/regex-directed-graph-line-parser'
+                inceptionYear = '2016'
                 licenses {
                     license {
-                        name 'MIT License'
-                        url 'https://opensource.org/licenses/MIT'
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
                     }
                 }
-
                 developers {
                     developer {
-                        id 'scottg489'
-                        name 'Scott Giminiani'
-                        email 'scottg489@gmail.com'
+                        id = 'scottg489'
+                        name = 'Scott Giminiani'
                     }
+                }
+                scm {
+                    connection = 'git@github.com:ScottG489/regex-directed-graph-line-parser.git'
+                    developerConnection = 'git@github.com:ScottG489/regex-directed-graph-line-parser.git'
+                    url = 'https://github.com/ScottG489/regex-directed-graph-line-parser'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
+    }
+}
+
+
+jreleaser {
+    signing {
+        active = 'ALWAYS'
+        armored = true
+        mode = 'FILE'
+        publicKey = 'public.gpg'
+        secretKey = 'private.gpg'
+        verify = true
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'ALWAYS'
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+            nexus2 {
+                'snapshot-deploy' {
+                    active = 'SNAPSHOT'
+                    snapshotUrl = 'https://central.sonatype.com/repository/maven-snapshots/'
+                    applyMavenCentralRules = true
+                    snapshotSupported = true
+                    closeRepository = true
+                    releaseRepository = true
+                    stagingRepository('build/staging-deploy')
                 }
             }
         }
