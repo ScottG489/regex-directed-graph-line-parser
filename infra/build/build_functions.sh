@@ -51,6 +51,4 @@ EOF
   sleep 30  # Wait for key to be fully available on keyserver
 
   ./gradlew publish jreleaserDeploy
-
-  set -x
 }
