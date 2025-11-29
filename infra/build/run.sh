@@ -16,11 +16,17 @@ set -x
 
 declare -r _PROJECT_NAME='regex-directed-graph-line-parser'
 declare -r _GIT_REPO='git@github.com:ScottG489/regex-directed-graph-line-parser.git'
+declare -r _RUN_TASK=$(jq -r .RUN_TASK <<< "$1")
+declare -r _GIT_BRANCH=$(jq -r .GIT_BRANCH <<< "$1")
 
-git clone $_GIT_REPO
+if [ ! -d "$_PROJECT_NAME" ]; then
+  git clone --branch $_GIT_BRANCH $_GIT_REPO
+fi
 cd $_PROJECT_NAME
 
 build_test
+
+[ "$_RUN_TASK" != "deploy" ] && exit 0
 
 set +x
 upload_archives "$1"
