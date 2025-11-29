@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source /home/build-user/build/build_functions.sh
+source $HOME/build/build_functions.sh
 
 trap cleanup EXIT
 cleanup() {
