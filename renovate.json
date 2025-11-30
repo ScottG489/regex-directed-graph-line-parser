@@ -11,13 +11,6 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
-      "matchStrings": ["ARG NODE_VERSION=(?<currentValue>\\S+)"],
-      "depNameTemplate": "node",
-      "datasourceTemplate": "node-version"
-    },
-    {
-      "customType": "regex",
       "managerFilePatterns": ["/(^|/)Dockerfile($|\\.)/"],
       "matchStrings": [
         "\\s+(?<depName>[a-z0-9][a-z0-9+.-]+)=(?<currentValue>[^\\s\\\\]+)"
