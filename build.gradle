@@ -13,7 +13,7 @@ repositories {
 
 group = "io.github.scottg489"
 base.archivesName = "regex-directed-graph-line-parser"
-version = "0.4.0"
+version = "0.4.1-SNAPSHOT"
 
 dependencies {
     api 'com.fasterxml.jackson.core:jackson-databind:2.20.1'
