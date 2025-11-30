@@ -3,10 +3,8 @@ package rdglp.parse
 import rdglp.node.ParserNode
 import rdglp.strategy.LineHandlingStrategy
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class RegexDirectedGraphLineParserTest extends Specification {
-    @Unroll
     def "Given a parser applicable for a line '#expectedLine' and an actual line '#actualLine' then parser node's line handler should be called #handleCallCount times and an exception should be thrown: #wasExceptionThrown"(String expectedLine,
                 String actualLine,
                 int handleCallCount,
