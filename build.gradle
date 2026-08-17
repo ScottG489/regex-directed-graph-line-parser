@@ -16,7 +16,7 @@ base.archivesName = "regex-directed-graph-line-parser"
 version = "0.4.1-SNAPSHOT"
 
 dependencies {
-    api 'com.fasterxml.jackson.core:jackson-databind:2.22.1'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.22.2'
 
     testImplementation 'org.spockframework:spock-core:2.4-groovy-5.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
